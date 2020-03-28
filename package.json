@@ -1,0 +1,24 @@
+{
+  "name": "dino-compare",
+  "version": "1.0.0",
+  "description": "## Student Instructions",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ananthakrishna-hs/dinoCompare.git"
+  },
+  "author": "ananthakrishna",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ananthakrishna-hs/dinoCompare/issues"
+  },
+  "homepage": "https://github.com/ananthakrishna-hs/dinoCompare#readme",
+  "dependencies": {
+    "http-server": "^0.12.1",
+    "minimist": "^1.2.5"
+  }
+}
