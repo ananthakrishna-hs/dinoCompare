@@ -13,7 +13,7 @@
 
 ## Installation/Development
 - Download/clone the repository.
-- Download node and npm from Node official website.
+- Download node and npm from [Node official website](https://nodejs.org/en/).
 - In command line run at the downloaded repository level:
     - `npm install`
     - `npm run serve`
