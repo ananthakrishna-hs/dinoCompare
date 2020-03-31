@@ -17,7 +17,7 @@ const grid = document.getElementById('grid');
  * @param {DinoObject} dinoObject - Dino information to create object
  */
 function Dino (dinoObject) {
-  this.type = 'Dino';
+  this.type = 'DINO';
   this.name = dinoObject.species;
   this.weight = dinoObject.weight;
   this.height = dinoObject.height;
@@ -47,7 +47,7 @@ const dinosCreate = (dinoData) => {
  * @param {FormData} humanData - Data obtained from form
  */
 function Human (humanData) {
-  this.type = 'Human';
+  this.type = 'HUMAN';
   this.name = humanData.get('name');
   this.image = 'images/human.png';
   this.weight = Number(humanData.get('weight'));
@@ -190,11 +190,7 @@ const renderTiles = (tiles) => {
 const generateTiles = (tilesData) => {
   const tiles = [];
   tilesData.forEach(t => {
-    if (t.type === 'Human') {
-      tiles.push(new Tile(t.name, t.image, ''));
-    } else {
-      tiles.push(new Tile(t.name, t.image, getFact(t, tilesData[4])));
-    }
+    tiles.push(new Tile(t.name, t.image, t.type === 'HUMAN' ? '' : getFact(t, tilesData[4])));
   });
   renderTiles(tiles);
 };
