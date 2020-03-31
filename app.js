@@ -1,3 +1,4 @@
+const button = document.getElementById('btn');
 const form = document.getElementById('dino-compare');
 const grid = document.getElementById('grid');
 
@@ -15,16 +16,16 @@ const grid = document.getElementById('grid');
  * @description Constructor to create Dino objects
  * @param {DinoObject} dinoObject - Dino information to create object
  */
-function Dino(dinoObject) {
-    this.type = 'Dino';
-    this.name = dinoObject.species;
-    this.weight = dinoObject.weight;
-    this.height = dinoObject.height;
-    this.diet = dinoObject.diet;
-    this.location = dinoObject.where;
-    this.period = dinoObject.when;
-    this.fact = dinoObject.fact;
-    this.image = `images/${dinoObject.species.toLowerCase()}.png`
+function Dino (dinoObject) {
+  this.type = 'Dino';
+  this.name = dinoObject.species;
+  this.weight = dinoObject.weight;
+  this.height = dinoObject.height;
+  this.diet = dinoObject.diet;
+  this.location = dinoObject.where;
+  this.period = dinoObject.when;
+  this.fact = dinoObject.fact;
+  this.image = `images/${dinoObject.species.toLowerCase()}.png`;
 }
 
 /**
@@ -33,26 +34,26 @@ function Dino(dinoObject) {
  * @returns {Dino[]} Array of Dino objects
  */
 const dinosCreate = (dinoData) => {
-    let dinos = [];
-    dinoData.forEach(dItem => {
-        const d = new Dino(dItem);
-        dinos.push(d);
-    });
-    return dinos;
-}
+  const dinos = [];
+  dinoData.forEach(dItem => {
+    const d = new Dino(dItem);
+    dinos.push(d);
+  });
+  return dinos;
+};
 
 /**
  * @description Constructor to create human object
  * @param {FormData} humanData - Data obtained from form
  */
-function Human(humanData) {
-    this.type = 'Human'
-    this.name = humanData.get('name');
-    this.image = `images/human.png`;
-    this.weight = Number(humanData.get('weight'));
-    this.height = Number(humanData.get('feet')) * 12 + Number(humanData.get('inches'));
-    this.diet = humanData.get('diet');
-    this.location = humanData.get('location');
+function Human (humanData) {
+  this.type = 'Human';
+  this.name = humanData.get('name');
+  this.image = 'images/human.png';
+  this.weight = Number(humanData.get('weight'));
+  this.height = Number(humanData.get('feet')) * 12 + Number(humanData.get('inches'));
+  this.diet = humanData.get('diet');
+  this.location = humanData.get('location');
 }
 
 /**
@@ -61,10 +62,10 @@ function Human(humanData) {
  * @param {string} image - Image url to be displayed
  * @param {string} fact - Fact generated
  */
-function Tile(name, image, fact) {
-    this.name = name;
-    this.image = image;
-    this.fact = fact;
+function Tile (name, image, fact) {
+  this.name = name;
+  this.image = image;
+  this.fact = fact;
 }
 
 /**
@@ -74,15 +75,15 @@ function Tile(name, image, fact) {
  * @returns {string} Weight compared fact
  */
 const weightComparator = (dinoWeight, humanWeight) => {
-    const diff = dinoWeight - humanWeight;
-    if (diff > 0) {
-        return `It weighs ${diff}lbs more than you`;
-    } else if (diff < 0) {
-        return `It weighs ${diff}lbs less than you`;
-    } else {
-        return 'You both weigh the same';
-    }
-}
+  const diff = dinoWeight - humanWeight;
+  if (diff > 0) {
+    return `It weighs ${diff}lbs more than you`;
+  } else if (diff < 0) {
+    return `It weighs ${diff}lbs less than you`;
+  } else {
+    return 'You both weigh the same';
+  }
+};
 
 /**
  * @description Function to compare height of dino and human
@@ -91,29 +92,29 @@ const weightComparator = (dinoWeight, humanWeight) => {
  * @returns {string} Height compared fact
  */
 const heightComparator = (dinoHeight, humanHeight) => {
-    const diff = dinoHeight - humanHeight;
-    if (diff > 0) {
-        return `It is ${diff}inches taller more than you`;
-    } else if (diff < 0) {
-        return `It is ${diff}inches shorter than you`;
-    } else {
-        return 'You both are of same height';
-    }
-}
+  const diff = dinoHeight - humanHeight;
+  if (diff > 0) {
+    return `It is ${diff}inches taller more than you`;
+  } else if (diff < 0) {
+    return `It is ${diff}inches shorter than you`;
+  } else {
+    return 'You both are of same height';
+  }
+};
 
 /**
  * @description Function to compare diet of dino and human
- * @param {string} dinoDiet - Diet of dino 
- * @param {string} humanDiet - Diet of human 
+ * @param {string} dinoDiet - Diet of dino
+ * @param {string} humanDiet - Diet of human
  * @returns {string} Diet compared fact
  */
 const dietComparator = (dinoDiet, humanDiet) => {
-    if (dinoDiet === humanDiet.toLowerCase()) {
-        return `You both are ${dinoDiet}es`;
-    } else {
-        return `Unlike you it is ${dinoDiet}`;
-    }
-}
+  if (dinoDiet === humanDiet.toLowerCase()) {
+    return `You both are ${dinoDiet}es`;
+  } else {
+    return `Unlike you it is ${dinoDiet}`;
+  }
+};
 
 /**
  * @description Function to compare location of dino and human
@@ -122,12 +123,12 @@ const dietComparator = (dinoDiet, humanDiet) => {
  * @returns {string} Location compared fact
  */
 const locationComparator = (dinoLoc, humanLoc) => {
-    if (dinoLoc === humanLoc) {
-        return `Wow! it existed in ${dinoLoc}`;
-    } else {
-        return `Unlike you it existed in ${dinoLoc}`;
-    }
-}
+  if (dinoLoc === humanLoc) {
+    return `Wow! it existed in ${dinoLoc}`;
+  } else {
+    return `Unlike you it existed in ${dinoLoc}`;
+  }
+};
 
 /**
  * @description Function to generate random fact for the tile
@@ -136,94 +137,95 @@ const locationComparator = (dinoLoc, humanLoc) => {
  * @returns {string} The generated fact
  */
 const getFact = (dino, human) => {
-    if (dino.name === 'Pigeon') {
-        return 'All birds are living dinosaurs.';
-    }
-    const r = Math.floor(Math.random() * 6) + 1;
-    switch (r) {
-        case 1:
-            return dino.fact;
-        case 2:
-            return `It is from ${dino.period} period`;
-        case 3:
-            return weightComparator(dino.weight, human.weight);
-        case 4:
-            return heightComparator(dino.weight, human.weight);
-        case 5:
-            return dietComparator(dino.diet, human.diet);
-        case 6:
-            return locationComparator(dino.location, human.location);
-        default:
-            return 'Oof!, no fact here';
-    }
-}
+  if (dino.name === 'Pigeon') {
+    return 'All birds are living dinosaurs.';
+  }
+  const r = Math.floor(Math.random() * 6) + 1;
+  switch (r) {
+    case 1:
+      return dino.fact;
+    case 2:
+      return `It is from ${dino.period} period`;
+    case 3:
+      return weightComparator(dino.weight, human.weight);
+    case 4:
+      return heightComparator(dino.weight, human.weight);
+    case 5:
+      return dietComparator(dino.diet, human.diet);
+    case 6:
+      return locationComparator(dino.location, human.location);
+    default:
+      return 'Oof!, no fact here';
+  }
+};
 
 /**
- * 
- * @param {Tile[]} tiles 
+ *
+ * @param {Tile[]} tiles
  */
 const renderTiles = (tiles) => {
-    form.remove();
-    let gridFrag = new DocumentFragment();
-    tiles.forEach(t => {
-        const div = document.createElement('div');
-        div.classList.add('grid-item');
-        const heading = document.createElement('h3'); 
-        const img = document.createElement('img');
-        const p = document.createElement('p');
-        heading.innerHTML = t.name;
-        img.src = t.image;
-        p.innerHTML = t.fact;
-        div.appendChild(heading);
-        div.appendChild(img);
-        div.appendChild(p);
-        gridFrag.appendChild(div);
-    });
-    grid.appendChild(gridFrag);
-} 
+  form.remove();
+  const gridFrag = new DocumentFragment();
+  tiles.forEach(t => {
+    const div = document.createElement('div');
+    div.classList.add('grid-item');
+    const heading = document.createElement('h3');
+    const img = document.createElement('img');
+    const p = document.createElement('p');
+    heading.innerHTML = t.name;
+    img.src = t.image;
+    p.innerHTML = t.fact;
+    div.appendChild(heading);
+    div.appendChild(img);
+    div.appendChild(p);
+    gridFrag.appendChild(div);
+  });
+  grid.appendChild(gridFrag);
+};
 
 /**
  * @description Function to generate tiles
  * @param {any[]} tilesData - Array of dino and human data
  */
 const generateTiles = (tilesData) => {
-    const tiles = [];
-    tilesData.forEach(t => {
-        if (t.type === 'Human') {
-            tiles.push(new Tile(t.name, t.image, ''));
-        } else {
-            tiles.push(new Tile(t.name, t.image, getFact(t, tilesData[4])));
-        }
-    });
-    renderTiles(tiles);
-}
+  const tiles = [];
+  tilesData.forEach(t => {
+    if (t.type === 'Human') {
+      tiles.push(new Tile(t.name, t.image, ''));
+    } else {
+      tiles.push(new Tile(t.name, t.image, getFact(t, tilesData[4])));
+    }
+  });
+  renderTiles(tiles);
+};
 
 /**
  * @description Function to create date for infographic tiles
  * @param {DinoObject[]} dinoData - Array of dino information data
  */
 const createData = (dinoData) => {
-    const tiles = dinosCreate(dinoData);
-    const human = (function() {
-        return new Human(new FormData(form));
-    })();
-    tiles.splice(4, 0, human);
-    generateTiles(tiles);
-}
+  const tiles = dinosCreate(dinoData);
+  const human = (function () {
+    return new Human(new FormData(form));
+  })();
+  tiles.splice(4, 0, human);
+  generateTiles(tiles);
+};
 
 /**
  * @description Function to handle button click
  */
 const compare = () => {
-    fetch('dino.json')
-        .then(response => response.json())
-        .then(dinos => {
-            createData(dinos.Dinos);
-        })
-        .catch(err => {
-            const errElement = document.createElement('div');
-            errElement.classList.add('grid-item');
-            errElement.innerHTML = 'Oops' +  err;
-        });
-}
+  fetch('dino.json')
+    .then(response => response.json())
+    .then(dinos => {
+      createData(dinos.Dinos);
+    })
+    .catch(err => {
+      const errElement = document.createElement('div');
+      errElement.classList.add('grid-item');
+      errElement.innerHTML = 'Oops' + err;
+    });
+};
 
+button.addEventListener('click', compare);
